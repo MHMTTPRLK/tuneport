@@ -1,0 +1,8 @@
+build/
+.DS_Store
+*.dmg
+# eski deneme dosyaları
+p3ctl
+P3Menu
+scan
+probe

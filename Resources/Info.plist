@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>tr</string>
+        <string>de</string>
+        <string>es</string>
+        <string>fr</string>
+        <string>it</string>
+        <string>pt-BR</string>
+        <string>pl</string>
+        <string>ru</string>
+        <string>uk</string>
+        <string>id</string>
+        <string>ar</string>
+        <string>he</string>
+        <string>bn</string>
+        <string>ja</string>
+        <string>ko</string>
+        <string>zh-Hans</string>
+    </array>
+    <key>CFBundleName</key>
+    <string>Tuneport</string>
+    <key>CFBundleDisplayName</key>
+    <string>Tuneport</string>
+    <key>CFBundleIdentifier</key>
+    <string>app.tuneport.mac</string>
+    <key>CFBundleExecutable</key>
+    <string>Tuneport</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.3.0</string>
+    <key>CFBundleVersion</key>
+    <string>3</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.utilities</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Tuneport uses Bluetooth to control your Soundcore earbuds' sound mode, equalizer and battery status.</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Open source software, licensed under GPL-3.0</string>
+</dict>
+</plist>

@@ -11,10 +11,22 @@ APP="build/Tuneport.app"
 VERSION="$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' Resources/Info.plist)"
 MODE="${1:-}"
 
+# Canlı çeviri Apple'ın Translation çerçevesini kullanır (macOS 15+). SDK'da varsa zayıf
+# bağlanır: uygulama macOS 13/14'te de açılır, çeviri yalnızca 15+'ta etkinleşir.
+SDK="$(xcrun --show-sdk-path)"
+EXTRA_LINK=()
+if [ -d "$SDK/System/Library/Frameworks/Translation.framework" ]; then
+    EXTRA_LINK=(-Xlinker -weak_framework -Xlinker Translation)
+else
+    echo "  (uyarı: bu SDK'da Translation yok; canlı çeviri devre dışı derlenecek)"
+fi
+
 compile() {   # $1 = mimari, $2 = çıktı
     swiftc -O -parse-as-library \
         -target "$1-apple-macos13.0" \
         -framework IOBluetooth -framework ServiceManagement -framework CoreAudio \
+        -framework Speech -framework ScreenCaptureKit -framework AVFoundation \
+        ${EXTRA_LINK[@]+"${EXTRA_LINK[@]}"} \
         Sources/*/*.swift \
         -o "$2"
 }
@@ -63,8 +75,21 @@ if [ -f Resources/AppIcon.png ]; then
     rm -rf "$ICONSET"
 fi
 
-echo "▸ İmzalanıyor (yerel)"
-codesign --force --deep --sign - "$APP" >/dev/null 2>&1
+# Sabit bir sertifikayla imzalamak, macOS izinlerinin (Ekran Kaydı, Mikrofon) her derlemeden
+# sonra yeniden sorulmasını önler. Anahtar Zinciri'nde "Tuneport Development" adlı bir kod imzalama
+# sertifikası varsa o kullanılır; yoksa yerel (ad-hoc) imza atılır.
+SIGN_ID="-"
+if security find-identity -p codesigning 2>/dev/null | grep -q "Tuneport Development"; then
+    SIGN_ID="Tuneport Development"
+    echo "▸ İmzalanıyor (Tuneport Development)"
+else
+    echo "▸ İmzalanıyor (yerel; izinler her derlemede yeniden sorulabilir)"
+fi
+if ! codesign --force --deep --sign "$SIGN_ID" "$APP"; then
+    echo "  ⚠️  \"$SIGN_ID\" ile imzalanamadı, yerel imzaya dönülüyor"
+    codesign --force --deep --sign - "$APP"
+fi
+codesign -dvv "$APP" 2>&1 | grep -E "^(Authority|Signature)=" | sed 's/^/  /'
 
 echo "✓ Hazır: $APP"
 

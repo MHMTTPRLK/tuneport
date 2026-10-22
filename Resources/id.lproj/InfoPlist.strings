@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport menggunakan Bluetooth untuk mengatur mode suara, equalizer, dan baterai earbud Soundcore Anda.";
+"NSMicrophoneUsageDescription" = "Tuneport menggunakan mikrofon untuk menerjemahkan percakapan secara langsung. Audio diproses di Mac Anda dan tidak pernah direkam.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport mengubah ucapan menjadi teks di Mac Anda untuk menampilkan subtitel terjemahan langsung.";

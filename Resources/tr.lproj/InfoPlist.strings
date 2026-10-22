@@ -1,1 +1,4 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport, Soundcore kulaklığının ses modunu, ekolayzırını ve pil durumunu yönetmek için Bluetooth kullanır.";
+"NSMicrophoneUsageDescription" = "Tuneport, çevrenizdeki konuşmaları canlı çevirmek için mikrofonu kullanır. Ses Mac'inizde işlenir ve asla kaydedilmez.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport, canlı çeviri altyazıları göstermek için konuşmayı Mac'inizde yazıya döker.";
+"NSAppleEventsUsageDescription" = "Tuneport, Spotify veya Apple Music'te çalan parçayı gösterir ve oynatmayı kontrol eder.";

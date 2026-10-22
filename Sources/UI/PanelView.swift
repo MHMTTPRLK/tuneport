@@ -8,7 +8,10 @@ struct PanelView: View {
     @EnvironmentObject var loginItem: LoginItem
     @EnvironmentObject var lang: LanguageManager
     @EnvironmentObject var volume: EarbudVolume
+    @EnvironmentObject var translator: LiveTranslator
+    @EnvironmentObject var nowPlaying: NowPlaying
     @AppStorage("showBatteryInMenuBar") private var showBatteryInMenuBar = true
+    @AppStorage("translateExpanded") private var translateExpanded = false
 
     var body: some View {
         VStack(spacing: 10) {
@@ -18,9 +21,15 @@ struct PanelView: View {
                 soundModeCard(s)
                 eqCard(s)
                 controlsCard(s)
-                footer(s)
             } else {
                 placeholder
+            }
+            if let info = nowPlaying.info {
+                nowPlayingCard(info)
+            }
+            translateCard
+            if ctl.isConnected, let s = ctl.state {
+                footer(s)
             }
         }
         .padding(14)
@@ -276,6 +285,157 @@ struct PanelView: View {
                 }
             }
         }
+    }
+
+    // MARK: Şu an çalıyor
+
+    private func nowPlayingCard(_ info: NowPlayingInfo) -> some View {
+        Card {
+            HStack(spacing: 10) {
+                Group {
+                    if let art = info.artwork {
+                        Image(nsImage: art).resizable().aspectRatio(contentMode: .fill)
+                    } else {
+                        ZStack {
+                            Color.accentColor.opacity(0.15)
+                            Image(systemName: "music.note")
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundStyle(Color.accentColor)
+                        }
+                    }
+                }
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(info.title)
+                        .font(.system(size: 12, weight: .semibold))
+                        .lineLimit(1)
+                    if !info.artist.isEmpty {
+                        Text(info.artist)
+                            .font(.system(size: 11))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+                }
+                Spacer(minLength: 4)
+                HStack(spacing: 12) {
+                    Button { nowPlaying.previous() } label: { Image(systemName: "backward.fill") }
+                        .help(L("Previous track"))
+                    Button { nowPlaying.togglePlayPause() } label: {
+                        Image(systemName: info.isPlaying ? "pause.fill" : "play.fill")
+                            .font(.system(size: 15))
+                    }
+                    .help(L("Play / Pause"))
+                    Button { nowPlaying.next() } label: { Image(systemName: "forward.fill") }
+                        .help(L("Next track"))
+                }
+                .buttonStyle(.borderless)
+                .font(.system(size: 12))
+                .environment(\.layoutDirection, .leftToRight)
+            }
+        }
+        .help(L("Now playing"))
+    }
+
+    // MARK: Canlı çeviri
+
+    private var translateCard: some View {
+        Card {
+            HStack(spacing: 8) {
+                Text(L("Live translation").uppercased(with: lang.locale))
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.secondary)
+                if translator.isRunning {
+                    Circle().fill(Color.red).frame(width: 6, height: 6)
+                }
+                Spacer()
+                if LiveTranslator.isAvailable {
+                    Button {
+                        translator.toggle()
+                    } label: {
+                        Label(translator.isRunning ? L("Stop") : L("Start"),
+                              systemImage: translator.isRunning ? "stop.fill" : "captions.bubble")
+                            .font(.system(size: 11, weight: .medium))
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(translator.isRunning ? .red : .accentColor)
+                    .controlSize(.small)
+                }
+                Button {
+                    withAnimation(.easeOut(duration: 0.15)) { translateExpanded.toggle() }
+                } label: {
+                    Image(systemName: translateExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 10, weight: .semibold))
+                }
+                .buttonStyle(.borderless)
+            }
+
+            if !LiveTranslator.isAvailable {
+                Text(L("Requires macOS 15 or later"))
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+            } else if translateExpanded {
+                HStack(spacing: 6) {
+                    Chip(title: L("Mac audio"), isSelected: translator.source == .systemAudio) {
+                        translator.source = .systemAudio
+                    }
+                    Chip(title: L("Microphone"), isSelected: translator.source == .microphone) {
+                        translator.source = .microphone
+                    }
+                }
+                HStack(spacing: 6) {
+                    Picker("", selection: $translator.sourceLanguage) {
+                        ForEach(LiveTranslator.sourceLanguages, id: \.self) { code in
+                            Text(translator.displayName(forLanguage: code)).tag(code)
+                        }
+                    }
+                    .labelsHidden()
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(.secondary)
+                    Picker("", selection: $translator.targetLanguage) {
+                        ForEach(LiveTranslator.targetLanguages, id: \.self) { code in
+                            Text(translator.displayName(forLanguage: code)).tag(code)
+                        }
+                    }
+                    .labelsHidden()
+                }
+                .controlSize(.small)
+                .environment(\.layoutDirection, .leftToRight)
+
+                HStack {
+                    Toggle(L("Speak translation"), isOn: $translator.speakTranslation)
+                    Spacer()
+                    Toggle(L("Show original text"), isOn: $translator.showOriginal)
+                }
+                .toggleStyle(.checkbox)
+                .font(.system(size: 11))
+
+                if !translator.isRunning && translator.errorMessage == nil {
+                    Text(L("Subtitles appear at the bottom of the screen"))
+                        .font(.system(size: 10))
+                        .foregroundStyle(.tertiary)
+                }
+            }
+
+            if let err = translator.errorMessage {
+                Text(err)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            if translator.needsLanguageDownload {
+                Button {
+                    translator.requestLanguageDownload()
+                } label: {
+                    Label(L("Download languages"), systemImage: "arrow.down.circle")
+                        .font(.system(size: 11, weight: .medium))
+                }
+                .controlSize(.small)
+            }
+        }
+        .modifier(LanguageDownloadModifier(translator: translator))
     }
 
     // MARK: Ekolayzır

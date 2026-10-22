@@ -1,23 +1,13 @@
 <p align="center">
-  <img src="Resources/AppIcon.png" width="128" alt="Tuneport icon">
-</p>
-
-<h1 align="center">Tuneport</h1>
-
-<p align="center">
-  A native macOS menu bar app for Soundcore earbuds.<br>
-  Noise cancelling, equalizer and battery — right from your Mac's menu bar.
+  <img src="docs/hero.png" alt="Tuneport — your Soundcore earbuds, right in your Mac's menu bar">
 </p>
 
 <p align="center">
-  <a href="#installation">Installation</a> ·
+  <a href="../../releases/latest"><b>Download</b></a> ·
   <a href="#features">Features</a> ·
+  <a href="#installation">Installation</a> ·
   <a href="#supported-devices">Supported devices</a> ·
   <a href="#türkçe">Türkçe</a>
-</p>
-
-<p align="center">
-  <img src="docs/screenshot.png" width="360" alt="Tuneport panel">
 </p>
 
 ---
@@ -29,6 +19,8 @@ The official Soundcore app only runs on phones. If you use your earbuds with a M
 - **Sound modes** — Noise Cancelling, Normal and Transparency, plus ANC types (Transport, Indoor, Outdoor) and transparency types (Full, Vocal)
 - **Equalizer** — 8-band curve you can drag directly, and all 22 presets from the official app
 - **Battery** — left/right levels and charging state, optional percentage in the menu bar
+- **Live translation** — on-device subtitles that translate what you hear (videos, calls) or what people say to you, with optional spoken translation in your earbuds (macOS 15+)
+- **Now playing** — see what's playing (Spotify, Apple Music, YouTube in the browser…) with play/pause and skip buttons
 - **Earbud volume** — change only the earbuds' volume from the panel; your Mac's speakers keep their own level
 - **Keeps audio quality high** — keeps your Mac's built-in mic as the default input, so the earbuds never drop to the low-quality "headset" (HFP) profile
 - **Switch earbuds** — pick any paired Soundcore device from the panel; Tuneport disconnects the current one and connects the new one
@@ -58,6 +50,15 @@ cd tuneport
 ```
 
 On first launch macOS asks for Bluetooth permission — Tuneport needs it to talk to the earbuds.
+
+## Live translation
+
+Requires macOS 15 (Sequoia) or later. Everything runs on your Mac: speech is recognized with Apple's on-device speech recognition and translated with Apple's Translation framework. Nothing is recorded or sent anywhere.
+
+- **Mac audio** — translates whatever your Mac is playing: videos, meetings, films. Needs *Screen Recording* permission (macOS uses it for capturing system audio; Tuneport only reads the audio).
+- **Microphone** — translates people talking to you. Uses your Mac's built-in mic, so the earbuds stay in high-quality mode.
+- Subtitles float at the bottom of the screen; you can drag them anywhere. Optionally the translation is spoken in your earbuds.
+- The first time you use a language pair, macOS may ask to download it.
 
 ## Supported devices
 
@@ -111,7 +112,6 @@ To add a language, copy `Resources/en.lproj` to `Resources/<language-code>.lproj
 - [ ] Gaming mode, touch tones
 - [ ] "Find my earbuds" and ear tip fit test
 - [ ] More Soundcore models
-- [ ] **Live translation (0.4)** — on-device speech recognition + translation of what you hear (videos, calls) or what people say to you, as live subtitles or spoken in your earbuds
 - [ ] Signed and notarized releases
 
 ## Acknowledgements
@@ -135,7 +135,9 @@ Soundcore and Anker are trademarks of Anker Innovations. This project is not aff
 - Gürültü Engelleme / Normal / Şeffaf mod, ANC türleri (Ulaşım, İç mekan, Dış mekan)
 - Sürüklenebilir 8 bantlı ekolayzır ve resmi uygulamadaki 22 hazır profil
 - Sol/sağ pil durumu, menü çubuğunda pil yüzdesi
+- Şu an çalan parça (kapak, şarkı, sanatçı) ve oynat/duraklat, ileri/geri düğmeleri
 - Sadece kulaklığın ses seviyesini ayarlama; Mac hoparlörünün seviyesi değişmez
+- **Canlı çeviri:** Mac'te çalan sesi (video, toplantı) ya da mikrofondan duyulan konuşmayı ekranın altında Türkçe altyazıya çevirir, istenirse kulaklıkta seslendirir. Tamamen cihaz içinde çalışır (macOS 15+)
 - Mac'in dahili mikrofonunu varsayılan tutarak kulaklığın düşük kaliteli "telefon" moduna (HFP) düşmesini engeller
 - Panelden eşleşmiş Soundcore kulaklıklar arasında geçiş
 - 17 dil, panelden anında değiştirilebilir

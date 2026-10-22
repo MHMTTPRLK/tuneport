@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport 使用蓝牙控制你的 Soundcore 耳机的声音模式、均衡器和电量。";
+"NSMicrophoneUsageDescription" = "Tuneport 使用麦克风实时翻译对话。音频在你的 Mac 上处理,绝不会被录制。";
+"NSSpeechRecognitionUsageDescription" = "Tuneport 在你的 Mac 上将语音转换为文字,以显示实时翻译字幕。";

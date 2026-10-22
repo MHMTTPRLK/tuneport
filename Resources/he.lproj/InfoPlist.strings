@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport משתמשת ב-Bluetooth כדי לשלוט במצב הצליל, באקולייזר ובסוללה של אוזניות Soundcore.";
+"NSMicrophoneUsageDescription" = "Tuneport משתמשת במיקרופון לתרגום חי של שיחות. השמע מעובד ב-Mac ולעולם אינו מוקלט.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport ממירה דיבור לטקסט ב-Mac כדי להציג כתוביות מתורגמות בזמן אמת.";

@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport używa Bluetooth do sterowania trybem dźwięku, korektorem i baterią słuchawek Soundcore.";
+"NSMicrophoneUsageDescription" = "Tuneport używa mikrofonu do tłumaczenia rozmów na żywo. Dźwięk jest przetwarzany na Macu i nigdy nie jest nagrywany.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport zamienia mowę na tekst na Macu, aby wyświetlać tłumaczone napisy na żywo.";

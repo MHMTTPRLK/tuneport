@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport utilise le Bluetooth pour contrôler le mode sonore, l'égaliseur et la batterie de vos écouteurs Soundcore.";
+"NSMicrophoneUsageDescription" = "Tuneport utilise le micro pour traduire en direct les conversations. L'audio est traité sur votre Mac et jamais enregistré.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport transcrit la parole sur votre Mac pour afficher des sous-titres traduits en direct.";

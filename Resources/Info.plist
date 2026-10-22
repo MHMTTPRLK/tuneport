@@ -35,9 +35,9 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>0.3.0</string>
+    <string>0.4.0</string>
     <key>CFBundleVersion</key>
-    <string>3</string>
+    <string>4</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>LSMinimumSystemVersion</key>
@@ -48,6 +48,12 @@
     <string>public.app-category.utilities</string>
     <key>NSBluetoothAlwaysUsageDescription</key>
     <string>Tuneport uses Bluetooth to control your Soundcore earbuds' sound mode, equalizer and battery status.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Tuneport uses the microphone for live translation of conversations around you. Audio is processed on your Mac and never recorded.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Tuneport turns speech into text on your Mac to show live translated subtitles.</string>
+    <key>NSAppleEventsUsageDescription</key>
+    <string>Tuneport shows the current track from Spotify or Apple Music and controls playback.</string>
     <key>NSHumanReadableCopyright</key>
     <string>Open source software, licensed under GPL-3.0</string>
 </dict>

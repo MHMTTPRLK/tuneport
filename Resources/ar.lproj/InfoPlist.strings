@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "يستخدم Tuneport البلوتوث للتحكم في وضع الصوت والمعادل والبطارية لسماعات Soundcore.";
+"NSMicrophoneUsageDescription" = "يستخدم Tuneport الميكروفون للترجمة الفورية للمحادثات. تتم معالجة الصوت على جهاز Mac ولا يتم تسجيله أبدًا.";
+"NSSpeechRecognitionUsageDescription" = "يحوّل Tuneport الكلام إلى نص على جهاز Mac لعرض ترجمة فورية على الشاشة.";

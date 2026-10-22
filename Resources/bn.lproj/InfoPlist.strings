@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "আপনার Soundcore ইয়ারবাডের সাউন্ড মোড, ইকুয়ালাইজার ও ব্যাটারি নিয়ন্ত্রণ করতে Tuneport ব্লুটুথ ব্যবহার করে।";
+"NSMicrophoneUsageDescription" = "কথোপকথনের লাইভ অনুবাদের জন্য Tuneport মাইক্রোফোন ব্যবহার করে। অডিও আপনার Mac-এ প্রক্রিয়া হয় এবং কখনো রেকর্ড হয় না।";
+"NSSpeechRecognitionUsageDescription" = "লাইভ অনূদিত সাবটাইটেল দেখাতে Tuneport আপনার Mac-এ কথাকে লেখায় রূপান্তর করে।";

@@ -1,1 +1,3 @@
 "NSBluetoothAlwaysUsageDescription" = "Tuneport는 Soundcore 이어폰의 사운드 모드, 이퀄라이저 및 배터리를 제어하기 위해 Bluetooth를 사용합니다.";
+"NSMicrophoneUsageDescription" = "Tuneport는 대화를 실시간 번역하기 위해 마이크를 사용합니다. 오디오는 Mac에서 처리되며 녹음되지 않습니다.";
+"NSSpeechRecognitionUsageDescription" = "Tuneport는 실시간 번역 자막을 표시하기 위해 Mac에서 음성을 텍스트로 변환합니다.";

@@ -49,6 +49,7 @@ struct TuneportApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @StateObject private var ctl = P3Controller()
     @StateObject private var loginItem = LoginItem()
+    @StateObject private var volume = EarbudVolume()
     @ObservedObject private var lang = LanguageManager.shared
     @AppStorage("showBatteryInMenuBar") private var showBatteryInMenuBar = true
 
@@ -58,6 +59,7 @@ struct TuneportApp: App {
                 .environmentObject(ctl)
                 .environmentObject(loginItem)
                 .environmentObject(lang)
+                .environmentObject(volume)
                 .environment(\.locale, lang.locale)
                 .environment(\.layoutDirection, lang.isRightToLeft ? .rightToLeft : .leftToRight)
                 .id(lang.activeCode)   // dil değişince panel anında yeniden çizilir

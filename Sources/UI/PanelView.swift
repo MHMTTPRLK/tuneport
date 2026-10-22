@@ -7,6 +7,7 @@ struct PanelView: View {
     @EnvironmentObject var ctl: P3Controller
     @EnvironmentObject var loginItem: LoginItem
     @EnvironmentObject var lang: LanguageManager
+    @EnvironmentObject var volume: EarbudVolume
     @AppStorage("showBatteryInMenuBar") private var showBatteryInMenuBar = true
 
     var body: some View {
@@ -24,7 +25,12 @@ struct PanelView: View {
         }
         .padding(14)
         .frame(width: 340)
-        .onAppear { ctl.refreshDeviceList() }
+        .onAppear {
+            ctl.refreshDeviceList()
+            volume.attach(toDeviceNamed: ctl.deviceName)
+        }
+        .onChange(of: ctl.deviceName) { name in volume.attach(toDeviceNamed: name) }
+        .onChange(of: ctl.isConnected) { _ in volume.attach(toDeviceNamed: ctl.deviceName) }
     }
 
     // MARK: Başlık
@@ -208,6 +214,22 @@ struct PanelView: View {
                 Spacer()
                 BatteryGauge(label: L("Right"), level: s.batteryRight, charging: s.chargingRight)
                     .help(L("Right earbud"))
+            }
+            if volume.isAvailable {
+                HStack(spacing: 8) {
+                    Image(systemName: "speaker.fill")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                    Slider(value: Binding(get: { Double(volume.volume) },
+                                          set: { volume.setVolume(Float($0)) }),
+                           in: 0...1)
+                        .controlSize(.small)
+                    Image(systemName: "speaker.wave.3.fill")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                }
+                .help(L("Earbud volume"))
+                .environment(\.layoutDirection, .leftToRight)
             }
         }
     }

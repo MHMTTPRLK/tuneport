@@ -29,6 +29,7 @@ The official Soundcore app only runs on phones. If you use your earbuds with a M
 - **Sound modes** — Noise Cancelling, Normal and Transparency, plus ANC types (Transport, Indoor, Outdoor) and transparency types (Full, Vocal)
 - **Equalizer** — 8-band curve you can drag directly, and all 22 presets from the official app
 - **Battery** — left/right levels and charging state, optional percentage in the menu bar
+- **Earbud volume** — change only the earbuds' volume from the panel; your Mac's speakers keep their own level
 - **Keeps audio quality high** — keeps your Mac's built-in mic as the default input, so the earbuds never drop to the low-quality "headset" (HFP) profile
 - **Switch earbuds** — pick any paired Soundcore device from the panel; Tuneport disconnects the current one and connects the new one
 - **17 languages** — switch instantly from the panel, no restart
@@ -134,6 +135,7 @@ Soundcore and Anker are trademarks of Anker Innovations. This project is not aff
 - Gürültü Engelleme / Normal / Şeffaf mod, ANC türleri (Ulaşım, İç mekan, Dış mekan)
 - Sürüklenebilir 8 bantlı ekolayzır ve resmi uygulamadaki 22 hazır profil
 - Sol/sağ pil durumu, menü çubuğunda pil yüzdesi
+- Sadece kulaklığın ses seviyesini ayarlama; Mac hoparlörünün seviyesi değişmez
 - Mac'in dahili mikrofonunu varsayılan tutarak kulaklığın düşük kaliteli "telefon" moduna (HFP) düşmesini engeller
 - Panelden eşleşmiş Soundcore kulaklıklar arasında geçiş
 - 17 dil, panelden anında değiştirilebilir
